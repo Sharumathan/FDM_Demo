@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+</head>
+<body>
+    <h1>Car Price Prediction</h1>
+    <form action="/predict" method="POST">
+        <!-- Dropdown for Company Name -->
+        <label for="company">Company Name:</label>
+        <select name="company" id="company">
+            {% for company in companies %}
+            <option value="{{ company }}">{{ company }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Fuel Type -->
+        <label for="fuel">Fuel Type:</label>
+        <select name="fuel" id="fuel">
+            {% for fuel in fuels %}
+            <option value="{{ fuel }}">{{ fuel }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Tyre Condition -->
+        <label for="tyre">Tyre Condition:</label>
+        <select name="tyre" id="tyre">
+            {% for tyre in tyres %}
+            <option value="{{ tyre }}">{{ tyre }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Owner Type -->
+        <label for="owner">Owner Type:</label>
+        <select name="owner" id="owner">
+            {% for owner in owners %}
+            <option value="{{ owner }}">{{ owner }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Registration Number -->
+        <label for="registration">Registration Number:</label>
+        <select name="registration" id="registration">
+            {% for registration in registrations %}
+            <option value="{{ registration }}">{{ registration }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Transmission Type -->
+        <label for="transmission">Transmission Type:</label>
+        <select name="transmission" id="transmission">
+            {% for transmission in transmissions %}
+            <option value="{{ transmission }}">{{ transmission }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Registration Certificate -->
+        <label for="certificate">Registration Certificate:</label>
+        <select name="certificate" id="certificate">
+            {% for certificate in certificates %}
+            <option value="{{ certificate }}">{{ certificate }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Dropdown for Car Name -->
+        <label for="car_name">Car Name:</label>
+        <select name="car_name" id="car_name">
+            {% for car in car_names %}
+            <option value="{{ car }}">{{ car }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <!-- Numerical input for Make Year -->
+        <label for="make_year">Make Year:</label>
+        <input type="number" name="make_year" required><br><br>
+
+        <!-- Numerical input for Mileage -->
+        <label for="mileage">Mileage:</label>
+        <input type="number" step="any" name="mileage" required><br><br>
+
+        <!-- Accessories as checkboxes -->
+        <label>Accessories:</label><br>
+        {% for accessory, weight in accessories.items() %}
+        <input type="checkbox" name="accessories" value="{{ accessory }}">{{ accessory }}<br>
+        {% endfor %}
+        
+        <br>
+        <input type="submit" value="Predict Price">
+    </form>
+</body>
+</html>
