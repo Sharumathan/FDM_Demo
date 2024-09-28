@@ -2,3 +2,5 @@ Flask==2.3.2
 numpy==1.24.3
 pandas==2.0.3
 scikit-learn==1.2.2
+keras==2.12.0  # or specify the version you installed
+tensorflow==2.12.0  # if you installed TensorFlow as well
