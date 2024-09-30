@@ -173,33 +173,35 @@ if __name__ == '__main__':
 
 
 
+import time
 import http.client
 import asyncio
 
 async def handler(event, context):
-    url = 'https://fdm-demo.onrender.com'
-    connection = http.client.HTTPSConnection(url)
+    url = 'yoursitehere.onrender.com'
+    connection = http.client.HTTPSConnection(url, timeout=10)  # Set timeout to 10 seconds
 
     try:
         connection.request('GET', '/')
         response = connection.getresponse()
 
         if response.status == 200:
-            return {
-                'statusCode': 200,
-                'body': 'Server pinged successfully'
-            }
+            print('Server pinged successfully')
         else:
-            raise Exception(f'Server ping failed with status code: {response.status}')
+            print(f'Server ping failed with status code: {response.status}')
 
     except Exception as error:
-        raise Exception(f'Error occurred: {error}')
+        print(f'Error occurred: {error}')
 
     finally:
         connection.close()
 
-# To run the handler function
-event = {}
-context = {}
-asyncio.run(handler(event, context))
+async def start_pinging():
+    while True:
+        await handler({}, {})
+        time.sleep(45)  # Ping every 45 seconds
+
+# Start the pinging process
+asyncio.run(start_pinging())
+
 
