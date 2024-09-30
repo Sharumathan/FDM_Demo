@@ -168,3 +168,38 @@ def predict():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 4000))  # Default to 4000 if PORT is not set
     app.run(host='0.0.0.0', port=port)
+
+
+
+
+
+import http.client
+import asyncio
+
+async def handler(event, context):
+    url = 'yoursitehere.onrender.com'
+    connection = http.client.HTTPSConnection(url)
+
+    try:
+        connection.request('GET', '/')
+        response = connection.getresponse()
+
+        if response.status == 200:
+            return {
+                'statusCode': 200,
+                'body': 'Server pinged successfully'
+            }
+        else:
+            raise Exception(f'Server ping failed with status code: {response.status}')
+
+    except Exception as error:
+        raise Exception(f'Error occurred: {error}')
+
+    finally:
+        connection.close()
+
+# To run the handler function
+event = {}
+context = {}
+asyncio.run(handler(event, context))
+
